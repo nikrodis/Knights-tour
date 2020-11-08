@@ -5,9 +5,6 @@ local CenterY = 65;
 local SizeBox = love.graphics.getWidth() / (N + N / 8);
 local Board = {}
 local Board_Val = {}
---local ki_start
---local kj_start
-local err = 0
 local ki, kj
 
 function ChessBoard(x, y)
@@ -68,16 +65,6 @@ function NextStep()
 		Board[ki * N + kj] = 'K';
 		Board[old_ki * N + old_kj] = '#';
 
-		--		if ki == old_ki or kj == old_kj then
-		--			err = err + 1
-		--			local pressedbutton = love.window.showMessageBox("Error", "Vse ochen ploho", { "Exit", "Next", "Nothing" })
-		--			if (pressedbutton == 1) then
-		--				love.event.quit()
-		--			elseif (pressedbutton == 2) then
-		--				love.load()
-		--			end
-		--		end
-
 		for i_val = -2, 2 do
 			for j_val = -2, 2 do
 				if math.abs(i_val) ~= math.abs(j_val) and
@@ -93,7 +80,6 @@ function NextStep()
 end
 
 function love.load()
-
 	love.graphics.setBackgroundColor(1 / 255 * 51, 1 / 255 * 153, 1 / 255 * 102);
 
 	for i = 0, N - 1 do
@@ -120,26 +106,6 @@ function love.load()
 			break
 		end
 	end
-	--	if (ki_start == N) and (kj_start == N) then
-	--		local pressedbutton = love.window.showMessageBox("The end", "kek", { "Exit" })
-	--		if (pressedbutton == 1) then
-	--			love.event.quit()
-	--		end
-	--	end
-
-
-	--  if ki_start==N then
-	--    ki_start=-1
-	--    kj_start=kj_start+1
-	--  end
-	--  ki_start=ki_start+1
-	--  Board[ki_start * N + kj_start] = 'K'
-
-
-	--  ki=ki_start
-	--  kj=kj_start
-
-	--  print(ki,kj)
 
 	for i = 0, N - 1 do
 		for j = 0, N - 1 do
@@ -157,10 +123,6 @@ function love.load()
 			end
 		end
 	end
-
-	--	for key, val in pairs(Board_Val) do
-	--		print("key == " .. key .. "; val == " .. val)
-	--	end
 end
 
 function love.keypressed(keyCode)
@@ -178,15 +140,6 @@ function love.update()
 end
 
 function love.draw()
-	--if Step < N * N then
-	--    NextStep()
-	--  else
-	--    love.load()
-	--  end
-
-	--  if love.mouse.isDown(2) then
-	--    love.load()
-	--  end
 	if N > 4 then
 		if EndStep() < N * N - 2 then -- wtf
 			if love.mouse.isDown(1) then
@@ -208,7 +161,6 @@ function love.draw()
 		for j = 0, N - 1 do
 			ChessBoard(i, j)
 			DrawObj(i, j)
-			--love.graphics.print(Board_Val[i * N + j], CenterX + SizeBox / 4 + (SizeBox * i), CenterY + SizeBox / 8 + (SizeBox * j), 0, 2)
 		end
 	end
 end
